@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="radioCardView">15dp</dimen>
+    <dimen name="margenCardView">5dp</dimen>
+    <dimen name="margenImgCardView">5dp</dimen>
+    <dimen name="tamanoTexto">30sp</dimen>
+</resources>
