@@ -9,80 +9,54 @@
     android:focusableInTouchMode="true">
 
 
-    <ImageView
-        android:id="@+id/imgPrincipal"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="2dp"
-        android:src="@drawable/chancho"
-        android:visibility="invisible" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
 
-    <LinearLayout
+        <EditText
+            android:id="@+id/etNombreJugador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textInputLayout"
+            android:hint="@string/ingresar_nombre_de_jugador"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="20sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnAgregar"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="4">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textInputLayout"
+        android:onClick="agregar"
+        android:text="@string/textoboton"
+        android:textAlignment="center"
+        android:visibility="visible" />
 
-        <RelativeLayout
-            android:id="@+id/parteSuperior"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3.25">
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:clickable="true"
+        android:onClick="iniciarPartida"
+        app:elevation="12dp"
+        app:fabSize="normal"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fabAgregar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:clickable="true"
-                android:onClick="agregar"
-                app:srcCompat="@android:drawable/ic_menu_add"
-                android:layout_marginRight="15dp"/>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true">
-
-                <EditText
-                    android:id="@+id/etNombreJugador"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/textInputLayout"
-                    android:hint="Ingresar nombre de jugador" />
-
-            </android.support.design.widget.TextInputLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.75">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/contenedor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                app:fabSize="mini"
-                app:srcCompat="@android:drawable/ic_menu_myplaces"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="15dp"
-                android:onClick="iniciarPartida"/>
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAgregar"
+        android:layout_margin="5dp"
+        />
 
 </RelativeLayout>

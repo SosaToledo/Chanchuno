@@ -19,7 +19,7 @@
 
 
             <ImageView
-                android:id="@+id/img"
+                android:id="@+id/fotocarnet"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_alignParentStart="true"
@@ -39,24 +39,27 @@
 
             <TextView
                 android:id="@+id/tvchancho"
-                android:layout_width="150dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:elevation="10dp"
+                android:elevation="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/fotocarnet"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/tamanoTexto" />
 
             <TextView
                 android:id="@+id/tvchanchoVacio"
-                android:layout_width="150dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/fotocarnet"
                 android:text="@string/palabraAcolorear"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="#EEEEEE"
                 android:textSize="@dimen/tamanoTexto"
                 android:layout_centerVertical="true"
-                android:layout_alignStart="@+id/tvchancho" />
+                />
 
         </RelativeLayout>
 

@@ -15,16 +15,10 @@ public class partida extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
 
-    private TextView chancho;
-    private CharSequence palabra = "CHANCHO";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partida);
-
-        chancho = (TextView) findViewById(R.id.tvchancho);
 
         lista= (RecyclerView) findViewById(R.id.rvPartida);
         lista.setHasFixedSize(true);
@@ -32,16 +26,7 @@ public class partida extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         lista.setLayoutManager(layoutManager);
 
-        adapter = new partidaAdapter(MainActivity.jugadors);
+        adapter = new partidaAdapter(MainActivity.jugadors,this);
         lista.setAdapter(adapter);
-    }
-
-    public void cargarLetra() {
-        String s = chancho.getText().toString()+palabra.charAt(chancho.getText().length());
-        chancho.setText(s.subSequence(0,s.length()));
-        Toast.makeText(this, "Agregar", Toast.LENGTH_SHORT).show();
-        if (chancho.getText().length() == 7){
-            chancho.setText("¡Chancho Va!");
-        }
     }
 }
