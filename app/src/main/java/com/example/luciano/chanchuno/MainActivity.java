@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
 
-    public static List<String> jugadors;
+    public static ArrayList<String> jugadors = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
             if (jugadors.size()==1){
                 dialog.setTitle("Ah pero sos loco");
-                dialog.setMessage("¿Como vas a jugar solo?");
+                dialog.setMessage("¿Cómo vas a jugar solo?");
             }
             dialog.setCancelable(true);
             dialog.setPositiveButton("Esta bien", new DialogInterface.OnClickListener() {

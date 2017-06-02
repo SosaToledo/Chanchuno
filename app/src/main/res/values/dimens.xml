@@ -4,4 +4,9 @@
     <dimen name="margenCardView">5dp</dimen>
     <dimen name="margenImgCardView">5dp</dimen>
     <dimen name="tamanoTexto">30sp</dimen>
+    <dimen name="dialog_body">56dp</dimen>
+    <dimen name="padding_between">8dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
+    <dimen name="normal_padding">8dp</dimen>
+    <dimen name="edit_text_padding">8dp</dimen>
 </resources>

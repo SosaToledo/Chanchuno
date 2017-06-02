@@ -7,4 +7,5 @@
     <string name="palabraAcolorear">CHANCHO</string>
     <string name="textoboton">Agregar</string>
     <string name="ingresar_nombre_de_jugador">Ingresar nombre de jugador</string>
+    <string name="nombre_input">nombre</string>
 </resources>
