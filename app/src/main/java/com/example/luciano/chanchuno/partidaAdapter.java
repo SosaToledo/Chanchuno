@@ -1,21 +1,21 @@
 package com.example.luciano.chanchuno;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.awt.font.NumericShaper;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -23,12 +23,13 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
     private final Context contexto;
     private CharSequence palabra = "CHANCHO";
     private List<String> jugadors;
-    public static int cantJugadores = 0;
+    //variable de prueba para ver si puedo hacer que los chanchos no se repitan
+    private List<Integer> numer = new ArrayList<>();
+    private Map<String,String>jugadores = new HashMap<>();
 
     public partidaAdapter(List<String> jugadors, Context context) {
         this.jugadors = jugadors;
         this.contexto = context;
-        cantJugadores = jugadors.size();
     }
 
     @Override
@@ -40,12 +41,23 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
     @Override
     public void onBindViewHolder(partidaAdapter.partidaViewHolder holder, int position) {
         holder.nom.setText(jugadors.get(position));
+        String s = "pig"+(conseguirNumero());
+        holder.numeroChancho=s;
+        System.out.println(s);
+        int id = contexto.getResources().getIdentifier(s,"drawable",contexto.getPackageName());
+        holder.foto.setImageResource(id);
+        jugadores.put(s,holder.nom.getText().toString());
+    }
+
+    private int conseguirNumero() {
         int numero;
         Random r = new Random();
         numero=(r.nextInt(19)+1);
-        String s = "pig"+(numero);
-        int id = contexto.getResources().getIdentifier(s,"drawable",contexto.getPackageName());
-        holder.foto.setImageResource(id);
+        if (numer.contains(numero)){
+            numero=conseguirNumero();
+        }
+        numer.add(numero);
+        return numero;
     }
 
     @Override
@@ -54,25 +66,95 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
     }
 
     @Override
-    public void onItemClick(final View v, final ImageView foto, final TextView chancho, final TextView chanchoFondo, final TextView nom, final int position) {
-        if (chancho.length()<11){
-            String s = chancho.getText().toString() + palabra.charAt(chancho.getText().length());
+    public void onItemClick(View v, partidaViewHolder viewHolder, int position) {
+        if (viewHolder.chancho.length()<11){
+            String s = viewHolder.chancho.getText().toString() + palabra.charAt(viewHolder.chancho.getText().length());
             if (s.length() >= 0) {
-                chancho.setText(s.subSequence(0, s.length()));
+                viewHolder.chancho.setText(s.subSequence(0, s.length()));
             }
-            if (chancho.getText().length() == 7) {
-                chancho.setText("¡CHANCHO VA!");
-                chanchoFondo.setText("");
-                foto.setAlpha(0.5f);
-                Toast.makeText(v.getContext(), nom.getText()+" perdio.", Toast.LENGTH_SHORT).show();
-                jugadors.remove(position);
-                cantJugadores -= 1;
-                if (cantJugadores == 1){
-                    String jugador = jugadors.get(0);
-                    Toast.makeText(v.getContext(), "ganó "+jugador, Toast.LENGTH_SHORT).show();
+            if (viewHolder.chancho.getText().length() == 7) {
+                viewHolder.chancho.setText("¡CHANCHO VA!");
+                viewHolder.chanchoFondo.setText("");
+                viewHolder.foto.setAlpha(0.5f);
+                Toast.makeText(v.getContext(), viewHolder.nom.getText()+" perdio.", Toast.LENGTH_SHORT).show();
+                jugadores.remove(viewHolder.numeroChancho);
+                if (jugadores.size() == 1){
+                    mostrarGanador();
                 }
 
             }
+        }
+    }
+
+    private void mostrarGanador() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
+        LayoutInflater layoutInflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = layoutInflater.inflate(R.layout.ganador,null);
+        builder.setView(v);
+
+        String numeroChanchuno, nombreChancho;
+        numeroChanchuno="";
+        nombreChancho="";
+        Iterator<Map.Entry<String,String>> iterator = jugadores.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String,String> e = iterator.next();
+            numeroChanchuno=e.getKey();
+            nombreChancho=e.getValue();
+        }
+
+        TextView tv = (TextView)v.findViewById(R.id.nombreGanador);
+        tv.setText("¡Gano "+nombreChancho+"!");
+        System.out.println(jugadors.get(0));
+
+        ImageView img = (ImageView)v.findViewById(R.id.fotoGanador);
+
+        int id = contexto.getResources().getIdentifier(numeroChanchuno,"drawable",contexto.getPackageName());
+        img.setImageResource(id);
+
+        Button revancha = (Button)v.findViewById(R.id.revancha);
+        Button salir = (Button) v.findViewById(R.id.salir);
+
+        final AlertDialog a = builder.create();
+        a.setCancelable(false);
+        a.show();
+
+        revancha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> listita = new ArrayList<String>(jugadors);
+                limpiar();
+                cargar(listita);
+                a.dismiss();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Activity)contexto).finish();
+            }
+        });
+    }
+
+    private void cargar(List<String> listita) {
+        jugadors.addAll(listita);
+        notifyItemRangeChanged(0,jugadors.size(),listita);
+    }
+
+    private void limpiar() {
+        jugadors.clear();
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLongItemClick(View v, partidaViewHolder holder) {
+        if (holder.chancho.length()>0 && holder.chancho.length()<11 ){
+            holder.chancho.setText(holder.chancho.getText().toString().substring(0,holder.chancho.getText().toString().length()-1));
+        }
+        if (holder.chancho.getText().toString().equals("¡CHANCHO VA!")){
+            holder.chancho.setText("CHANCH");
+            holder.foto.setAlpha(1f);
+            holder.chanchoFondo.setText("CHANCHO");
+            jugadores.put(holder.numeroChancho,holder.nom.getText().toString());
         }
     }
 
@@ -85,6 +167,7 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         public ImageView img;
         public TextView chancho;
         public itemClickListener listener;
+        public String numeroChancho;
         public partidaViewHolder(View v, itemClickListener listener){
             super(v);
             foto= (ImageView)v.findViewById(R.id.fotocarnet);
@@ -98,25 +181,18 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
 
         @Override
         public void onClick(final View v) {
-            listener.onItemClick(v, foto, chancho, chanchoFondo, nom, getAdapterPosition());
+            listener.onItemClick(v, this, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            if (chancho.length()>0 && chancho.length()<11 ){
-                chancho.setText(chancho.getText().toString().substring(0,chancho.getText().toString().length()-1));
-            }
-            if (chancho.getText().toString().equals("¡CHANCHO VA!")){
-                chancho.setText("CHANCH");
-                foto.setAlpha(1f);
-                chanchoFondo.setText("CHANCHO");
-                partidaAdapter.cantJugadores += 1;
-            }
+            listener.onLongItemClick(v,this);
             return true;
         }
     }
 }
 
 interface itemClickListener{
-    void onItemClick(View v, ImageView i, TextView c, TextView cf, TextView n,  int position);
+    void onItemClick(View v, partidaAdapter.partidaViewHolder viewHolder,  int position);
+    void onLongItemClick(View v, partidaAdapter.partidaViewHolder holder);
 }

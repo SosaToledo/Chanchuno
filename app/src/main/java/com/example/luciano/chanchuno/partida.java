@@ -36,5 +36,6 @@ public class partida extends AppCompatActivity {
 
         adapter = new partidaAdapter(jugadors,this);
         lista.setAdapter(adapter);
+
     }
 }

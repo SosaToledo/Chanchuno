@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chanchuno</string>
+    <string name="app_name">¡Chancho Va!</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
@@ -8,4 +8,6 @@
     <string name="textoboton">Agregar</string>
     <string name="ingresar_nombre_de_jugador">Ingresar nombre de jugador</string>
     <string name="nombre_input">nombre</string>
+    <string name="mainAct">¿Quienes juegan?</string>
+    <string name="partida">¡A jugar!</string>
 </resources>

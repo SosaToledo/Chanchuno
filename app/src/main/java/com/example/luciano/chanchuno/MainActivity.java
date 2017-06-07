@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,17 +50,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void agregar(View view) {
-        if (jugadors.size()==12){
-            Toast.makeText(this, "Maximo 12 jugadores", Toast.LENGTH_SHORT).show();
+        if(etNombre.getText().toString().length()==0){
+            Toast.makeText(this,"Ingrese algun nombre de jugador", Toast.LENGTH_SHORT).show();
         }else{
-            String dato = etNombre.getText().toString();
-            if(dato.length()==0){
-                Toast.makeText(this,"Ingrese el nombre del jugador", Toast.LENGTH_SHORT).show();
-            } else {
-                dato=Character.toUpperCase(dato.charAt(0))+dato.substring(1,dato.length());
-                jugadors.add(dato);
-                etNombre.setText("");
-                adapter.notifyDataSetChanged();
+            String c = etNombre.getText().toString().trim();
+            c=Character.toUpperCase(c.charAt(0))+c.substring(1,c.length());
+            if (jugadors.size()==12){
+                Toast.makeText(this, "Maximo 12 jugadores", Toast.LENGTH_SHORT).show();
+            }else{
+                if (!jugadors.contains((String)c)){
+                    jugadors.add(c);
+                    etNombre.setText("");
+                    adapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(this, etNombre.getText().toString()+" ya existe en la partida", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

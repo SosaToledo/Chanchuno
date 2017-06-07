@@ -23,6 +23,7 @@
             android:hint="@string/ingresar_nombre_de_jugador"
             android:inputType="text"
             android:maxLines="1"
+            android:maxLength="20"
             android:textSize="20sp" />
 
     </android.support.design.widget.TextInputLayout>
