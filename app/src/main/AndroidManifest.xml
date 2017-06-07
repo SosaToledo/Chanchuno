@@ -19,10 +19,12 @@
         </activity>
         <activity android:name=".partida"
             android:label="@string/partida"
+            android:screenOrientation="portrait"
             />
         <activity android:name=".MainActivity"
-            android:label="@string/mainAct">
-        </activity>
+            android:label="@string/mainAct"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
