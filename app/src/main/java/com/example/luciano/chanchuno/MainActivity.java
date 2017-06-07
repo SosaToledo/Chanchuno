@@ -49,19 +49,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void agregar(View view) {
-
-        String dato = etNombre.getText().toString();
-        if(dato.length()==0){
-            Toast.makeText(this,"ingrese algo puto", Toast.LENGTH_SHORT).show();
-        } else {
-            dato=Character.toUpperCase(dato.charAt(0))+dato.substring(1,dato.length());
-            jugadors.add(dato);
-            etNombre.setText("");
-            adapter.notifyDataSetChanged();
-        }
         if (jugadors.size()==12){
-            btnagregar.setEnabled(false);
             Toast.makeText(this, "Maximo 12 jugadores", Toast.LENGTH_SHORT).show();
+        }else{
+            String dato = etNombre.getText().toString();
+            if(dato.length()==0){
+                Toast.makeText(this,"Ingrese el nombre del jugador", Toast.LENGTH_SHORT).show();
+            } else {
+                dato=Character.toUpperCase(dato.charAt(0))+dato.substring(1,dato.length());
+                jugadors.add(dato);
+                etNombre.setText("");
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -86,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         }else {
             Intent intent = new Intent(this, partida.class);
+            intent.putExtra("jugadores", jugadors);
             startActivity(intent);
         }
     }

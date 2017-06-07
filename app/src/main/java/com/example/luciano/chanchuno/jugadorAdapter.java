@@ -15,7 +15,7 @@ import java.util.List;
  * Created by luciano on 23/05/17.
  */
 
-public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorViewHolder> {
+public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorViewHolder> implements itemClickListenerJugadores {
 
     private List<String> jugadors;
 
@@ -26,7 +26,7 @@ public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorV
     @Override
     public jugadorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_nombres,parent,false);
-        return new jugadorViewHolder(v);
+        return new jugadorViewHolder(v, this);
     }
 
     @Override
@@ -39,24 +39,32 @@ public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorV
         return jugadors.size();
     }
 
+    @Override
+    public void itemClick(View v, int position) {
+        jugadors.remove(position);
+        notifyDataSetChanged();
+    }
+
     public static class jugadorViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
         public TextView nom;
-        public jugadorViewHolder(View v){
+        public itemClickListenerJugadores listener;
+        public jugadorViewHolder(View v, itemClickListenerJugadores listener){
             super(v);
             nom = (TextView) v.findViewById(R.id.tvNombre);
             nom.setTextSize(24.0f);
+            this.listener = listener;
             v.setOnLongClickListener(this);
         }
 
         @Override
-        public boolean onLongClick(View v) {
+        public boolean onLongClick(final View v) {
             final android.app.AlertDialog.Builder dialogConfirmacion = new android.app.AlertDialog.Builder(v.getContext());
             dialogConfirmacion.setTitle("Eliminar a "+nom.getText().toString());
             dialogConfirmacion.setCancelable(true);
             dialogConfirmacion.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    MainActivity.eliminar(nom.getText().toString());
+                    listener.itemClick(v, getAdapterPosition());
                 }
             });
             dialogConfirmacion.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -70,4 +78,7 @@ public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorV
         }
 
     }
+}
+interface itemClickListenerJugadores{
+    void itemClick(View v, int position);
 }

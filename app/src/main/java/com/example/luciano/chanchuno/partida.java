@@ -17,14 +17,16 @@ import java.util.ArrayList;
 
 public class partida extends AppCompatActivity {
 
-    public static RecyclerView.Adapter adapter;
+    public RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
-
+    public ArrayList<String> jugadors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partida);
+
+        jugadors = getIntent().getStringArrayListExtra("jugadores");
 
         lista= (RecyclerView) findViewById(R.id.rvPartida);
         lista.setHasFixedSize(true);
@@ -32,13 +34,7 @@ public class partida extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         lista.setLayoutManager(layoutManager);
 
-        adapter = new partidaAdapter(MainActivity.jugadors,this);
+        adapter = new partidaAdapter(jugadors,this);
         lista.setAdapter(adapter);
-    }
-
-    public static void eliminar(String s){
-        MainActivity.jugadors.remove(s);
-        adapter.notifyDataSetChanged();
-
     }
 }

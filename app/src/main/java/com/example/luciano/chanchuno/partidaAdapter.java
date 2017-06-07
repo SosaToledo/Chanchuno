@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +17,11 @@ import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 
-public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaViewHolder>{
+public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaViewHolder> implements itemClickListener{
     private final Context contexto;
-    private List numeros = new ArrayList<Integer>();
-    CharSequence palabra = "CHANCHO";
+    private CharSequence palabra = "CHANCHO";
     private List<String> jugadors;
     public static int cantJugadores = 0;
 
@@ -35,7 +34,7 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
     @Override
     public partidaAdapter.partidaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cv_partida,parent,false);
-        return new partidaAdapter.partidaViewHolder(v);
+        return new partidaAdapter.partidaViewHolder(v, this);
     }
 
     @Override
@@ -54,67 +53,52 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         return jugadors.size();
     }
 
+    @Override
+    public void onItemClick(final View v, final ImageView foto, final TextView chancho, final TextView chanchoFondo, final TextView nom, final int position) {
+        if (chancho.length()<11){
+            String s = chancho.getText().toString() + palabra.charAt(chancho.getText().length());
+            if (s.length() >= 0) {
+                chancho.setText(s.subSequence(0, s.length()));
+            }
+            if (chancho.getText().length() == 7) {
+                chancho.setText("¡CHANCHO VA!");
+                chanchoFondo.setText("");
+                foto.setAlpha(0.5f);
+                Toast.makeText(v.getContext(), nom.getText()+" perdio.", Toast.LENGTH_SHORT).show();
+                jugadors.remove(position);
+                cantJugadores -= 1;
+                if (cantJugadores == 1){
+                    String jugador = jugadors.get(0);
+                    Toast.makeText(v.getContext(), "ganó "+jugador, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+    }
+
 
     public static class partidaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
-        CharSequence palabra = "CHANCHO";
+        private CharSequence palabra = "CHANCHO";
         public ImageView foto;
         public TextView nom;
         public TextView chanchoFondo;
         public ImageView img;
         public TextView chancho;
-        public partidaViewHolder(View v){
+        public itemClickListener listener;
+        public partidaViewHolder(View v, itemClickListener listener){
             super(v);
             foto= (ImageView)v.findViewById(R.id.fotocarnet);
             chanchoFondo = (TextView)v.findViewById(R.id.tvchanchoVacio);
             nom = (TextView) v.findViewById(R.id.tvNombreJugadorPartida);
             chancho = (TextView) v.findViewById(R.id.tvchancho);
+            this.listener = listener;
             v.setOnClickListener(this);
             v.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(final View v) {
-            if (chancho.length()<11){
-                String s = chancho.getText().toString() + palabra.charAt(chancho.getText().length());
-                if (s.length() >= 0) {
-                    chancho.setText(s.subSequence(0, s.length()));
-                }
-                if (chancho.getText().length() == 7) {
-                    AlertDialog.Builder dialogEliminar = new AlertDialog.Builder(v.getContext());
-                    dialogEliminar.setTitle("¿"+nom.getText()+" perdió?");
-                    dialogEliminar.setCancelable(false);
-                    dialogEliminar.setPositiveButton("sí", new DialogInterface.OnClickListener() {
-
-                        //caso afirmativo el jugador es eliminado.
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            chancho.setText("¡CHANCHO VA!");
-                            chanchoFondo.setText("");
-                            foto.setAlpha(0.5f);
-                            Toast.makeText(v.getContext(), nom.getText()+" perdio.", Toast.LENGTH_SHORT).show();
-                            partida.eliminar(nom.getText().toString());
-                            partidaAdapter.cantJugadores -= 1;
-                            if (partidaAdapter.cantJugadores == 1){
-                                String s = MainActivity.jugadors.get(0);
-                                Toast.makeText(v.getContext(), "ganó "+s, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                    dialogEliminar.setNegativeButton("No", new DialogInterface.OnClickListener() {
-
-                        //caso negativo el juegador vuelve a quedar a una letra de perder.
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            chancho.setText("CHANCH");
-                            foto.setAlpha(1f);
-                            chanchoFondo.setText("CHANCHO");
-                        }
-                    });
-                    dialogEliminar.show();
-
-                }
-            }
-
+            listener.onItemClick(v, foto, chancho, chanchoFondo, nom, getAdapterPosition());
         }
 
         @Override
@@ -122,7 +106,7 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
             if (chancho.length()>0 && chancho.length()<11 ){
                 chancho.setText(chancho.getText().toString().substring(0,chancho.getText().toString().length()-1));
             }
-            if (chancho.getText().toString().equals(new String("¡CHANCHO VA!"))){
+            if (chancho.getText().toString().equals("¡CHANCHO VA!")){
                 chancho.setText("CHANCH");
                 foto.setAlpha(1f);
                 chanchoFondo.setText("CHANCHO");
@@ -131,4 +115,8 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
             return true;
         }
     }
+}
+
+interface itemClickListener{
+    void onItemClick(View v, ImageView i, TextView c, TextView cf, TextView n,  int position);
 }
