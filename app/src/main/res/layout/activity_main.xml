@@ -8,32 +8,22 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
+    <EditText
+        android:id="@+id/etNombreJugador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
-
-        <EditText
-            android:id="@+id/etNombreJugador"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textInputLayout"
-            android:hint="@string/ingresar_nombre_de_jugador"
-            android:inputType="text"
-            android:maxLines="1"
-            android:maxLength="20"
-            android:textSize="20sp" />
-
-    </android.support.design.widget.TextInputLayout>
+        android:hint="@string/ingresar_nombre_de_jugador"
+        android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnAgregar"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textInputLayout"
+        android:layout_below="@id/etNombreJugador"
         android:onClick="agregar"
         android:text="@string/textoboton"
         android:textAlignment="center"

@@ -109,38 +109,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void eliminar(String nombre) {
-        jugadors.remove((String)nombre);
+        jugadors.remove(nombre);
         adapter.notifyDataSetChanged();
-        System.out.println(nombre);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = layoutInflater.inflate(R.layout.despedida,null);
-        builder.setView(v);
+        if (keyCode==event.KEYCODE_BACK){
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = layoutInflater.inflate(R.layout.despedida,null);
+            builder.setView(v);
 
-        Button quedarse = (Button)v.findViewById(R.id.btnQuedarse);
-        Button salir = (Button) v.findViewById(R.id.btnIrse);
+            Button quedarse = (Button)v.findViewById(R.id.btnQuedarse);
+            Button salir = (Button) v.findViewById(R.id.btnIrse);
 
-        final AlertDialog a = builder.create();
-        a.setCancelable(true);
-        a.show();
+            final AlertDialog a = builder.create();
+            a.setCancelable(true);
+            a.show();
 
-        quedarse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                a.dismiss();
-                Toast.makeText(MainActivity.this, "¡Te queremos :) !", Toast.LENGTH_SHORT).show();
-            }
-        });
-        salir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.this.finish();
-            }
-        });
+            quedarse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    a.dismiss();
+                    Toast.makeText(MainActivity.this, "¡Te queremos :) !", Toast.LENGTH_SHORT).show();
+                }
+            });
+            salir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.this.finish();
+                }
+            });
+        }
         // para las demas cosas, se reenvia el evento al listener habitual
         return super.onKeyDown(keyCode, event);
     }
