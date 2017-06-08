@@ -10,4 +10,7 @@
     <string name="nombre_input">nombre</string>
     <string name="mainAct">¿Quienes juegan?</string>
     <string name="partida">¡A jugar!</string>
+    <string name="despedidda">¿Ya te vas?</string>
+    <string name="btnquedarse">Esta bien, me quedo</string>
+    <string name="salir">Salir</string>
 </resources>

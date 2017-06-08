@@ -1,7 +1,9 @@
 package com.example.luciano.chanchuno;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -9,15 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etNombre;
@@ -106,5 +112,36 @@ public class MainActivity extends AppCompatActivity {
         jugadors.remove((String)nombre);
         adapter.notifyDataSetChanged();
         System.out.println(nombre);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = layoutInflater.inflate(R.layout.despedida,null);
+        builder.setView(v);
+
+        Button quedarse = (Button)v.findViewById(R.id.btnQuedarse);
+        Button salir = (Button) v.findViewById(R.id.btnIrse);
+
+        final AlertDialog a = builder.create();
+        a.setCancelable(true);
+        a.show();
+
+        quedarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                a.dismiss();
+                Toast.makeText(MainActivity.this, "¡Te queremos :) !", Toast.LENGTH_SHORT).show();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.finish();
+            }
+        });
+        // para las demas cosas, se reenvia el evento al listener habitual
+        return super.onKeyDown(keyCode, event);
     }
 }
