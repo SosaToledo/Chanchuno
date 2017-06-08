@@ -46,6 +46,9 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         System.out.println(s);
         int id = contexto.getResources().getIdentifier(s,"drawable",contexto.getPackageName());
         holder.foto.setImageResource(id);
+        holder.chancho.setText("");
+        holder.chanchoFondo.setText("CHANCHO");
+        holder.foto.setAlpha(1f);
         jugadores.put(s,holder.nom.getText().toString());
     }
 
@@ -121,9 +124,7 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         revancha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> listita = new ArrayList<String>(jugadors);
-                limpiar();
-                cargar(listita);
+                reiniciar();
                 a.dismiss();
             }
         });
@@ -135,13 +136,11 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         });
     }
 
-    private void cargar(List<String> listita) {
-        jugadors.addAll(listita);
-        notifyItemRangeChanged(0,jugadors.size(),listita);
-    }
-
-    private void limpiar() {
+    private void reiniciar() {
+        jugadores.clear();
+        List<String> aux = new ArrayList<>(jugadors);
         jugadors.clear();
+        jugadors.addAll(aux);
         notifyDataSetChanged();
     }
 
