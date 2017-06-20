@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/cuerpo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GOLA"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:id="@+id/closebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:text="Entendido"
+        android:textSize="19sp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_margin="7dp"
+        />
+</RelativeLayout>

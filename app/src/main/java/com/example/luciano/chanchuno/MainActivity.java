@@ -1,8 +1,6 @@
 package com.example.luciano.chanchuno;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,31 +14,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.OnViewInflateListener;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etNombre;
     private Button btnagregar;
+    private FloatingActionButton btncomenzar;
 
     public static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
 
     public static ArrayList<String> jugadors = new ArrayList<>();
+    FancyShowCaseView v1,v2,v3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        jugadors = new ArrayList<String>();
+        jugadors = new ArrayList<>();
 
         lista = (RecyclerView) findViewById(R.id.contenedor);
         lista.setHasFixedSize(false);
@@ -53,6 +52,66 @@ public class MainActivity extends AppCompatActivity {
 
         etNombre = (EditText) findViewById(R.id.etNombreJugador);
         btnagregar = (Button)findViewById(R.id.btnAgregar);
+        btncomenzar = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
+        llamarAlTutorial();
+    }
+
+    private void llamarAlTutorial() {
+        v1 = new FancyShowCaseView.Builder(this)
+            .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                @Override
+                public void onViewInflated(View view) {
+                    int t = 1;
+                    TextView tv= (TextView) view.findViewById(R.id.cuerpo);
+                    String s ="tutorial0"+t;
+                    int id = getResources().getIdentifier(s,"string",getPackageName());
+                    tv.setText(id);
+                    view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            v1.hide();
+                        }
+                    });
+                }
+            })
+            .closeOnTouch(false)
+            .build();
+        v2 = new FancyShowCaseView.Builder(this)
+                .focusOn(btnagregar)
+                .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        TextView tv= (TextView) view.findViewById(R.id.cuerpo);
+                        tv.setText(R.string.tutorial02);
+                        view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                v2.hide();
+                            }
+                        });
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+        v3 = new FancyShowCaseView.Builder(this)
+                .focusOn(btncomenzar)
+                .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        TextView tv= (TextView) view.findViewById(R.id.cuerpo);
+                        tv.setText(R.string.tutorial03);
+                        view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                v3.hide();
+                            }
+                        });
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+
+        new FancyShowCaseQueue ().add(v1).add(v2).add(v3).show();
     }
 
     public void agregar(View view) {
@@ -64,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             if (jugadors.size()==12){
                 Toast.makeText(this, "Maximo 12 jugadores", Toast.LENGTH_SHORT).show();
             }else{
-                if (!jugadors.contains((String)c)){
+                if (!jugadors.contains(c)){
                     jugadors.add(c);
                     etNombre.setText("");
                     adapter.notifyDataSetChanged();

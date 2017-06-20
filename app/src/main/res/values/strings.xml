@@ -13,4 +13,7 @@
     <string name="despedidda">¿Ya te vas?</string>
     <string name="btnquedarse">Esta bien, me quedo</string>
     <string name="salir">Salir</string>
+    <string name="tutorial01">Bienvenido a un anotador de chancho va, comencemos con el tutorial</string>
+    <string name="tutorial02">Para comenzar tenes que tener amigos, despues agregarlos de a uno y pulsa en \"Agregar\"</string>
+    <string name="tutorial03">Cuando todos esten en la lista, preciona aqui para comenzar la partida</string>
 </resources>

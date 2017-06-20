@@ -8,6 +8,23 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alwaysDrawnWithCache="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="11dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="¿Quienes juegan?"
+                android:textSize="25sp"
+                android:textAlignment="center"/>
+        </android.support.v7.widget.Toolbar>
+
     <EditText
         android:id="@+id/etNombreJugador"
         android:layout_width="match_parent"
@@ -16,16 +33,19 @@
         android:inputType="text"
         android:maxLength="20"
         android:maxLines="1"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_below="@id/toolbar"
+        />
 
     <Button
         android:id="@+id/btnAgregar"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/etNombreJugador"
         android:onClick="agregar"
         android:text="@string/textoboton"
+        android:layout_centerInParent="true"
         android:textAlignment="center"
         android:visibility="visible" />
 

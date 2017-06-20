@@ -43,7 +43,6 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         holder.nom.setText(jugadors.get(position));
         String s = "pig"+(conseguirNumero());
         holder.numeroChancho=s;
-        System.out.println(s);
         int id = contexto.getResources().getIdentifier(s,"drawable",contexto.getPackageName());
         holder.foto.setImageResource(id);
         holder.chancho.setText("");
