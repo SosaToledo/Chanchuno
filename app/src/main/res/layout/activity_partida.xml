@@ -6,7 +6,16 @@
     tools:context="com.example.luciano.chanchuno.partida"
     xmlns:tools="http://schemas.android.com/tools">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="32dp"
+            android:theme="?attr/actionBarTheme" />
+
         <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/toolbar2"
             android:id="@+id/rvPartida"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

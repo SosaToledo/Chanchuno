@@ -3,10 +3,12 @@ package com.example.luciano.chanchuno;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,14 +20,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.FocusShape;
+import me.toptas.fancyshowcase.OnViewInflateListener;
+
 
 public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaViewHolder> implements itemClickListener{
     private final Context contexto;
     private CharSequence palabra = "CHANCHO";
     private List<String> jugadors;
-    //variable de prueba para ver si puedo hacer que los chanchos no se repitan
     private List<Integer> numer = new ArrayList<>();
     private Map<String,String>jugadores = new HashMap<>();
+    private FancyShowCaseView v1,v2;
 
     public partidaAdapter(List<String> jugadors, Context context) {
         this.jugadors = jugadors;
@@ -39,7 +46,7 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
     }
 
     @Override
-    public void onBindViewHolder(partidaAdapter.partidaViewHolder holder, int position) {
+    public void onBindViewHolder(final partidaAdapter.partidaViewHolder holder, final int position) {
         holder.nom.setText(jugadors.get(position));
         String s = "pig"+(conseguirNumero());
         holder.numeroChancho=s;
@@ -49,6 +56,19 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         holder.chanchoFondo.setText("CHANCHO");
         holder.foto.setAlpha(1f);
         jugadores.put(s,holder.nom.getText().toString());
+        System.out.println(position);
+        if (position==1){
+            holder.chancho.getViewTreeObserver().addOnGlobalLayoutListener(
+                    new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            // Layout has happened here.
+                            // Don't forget to remove your listener when you are done with it.
+                            lanzartutorial(holder);
+                            holder.chancho.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    });
+        }
     }
 
     private int conseguirNumero() {
@@ -98,6 +118,7 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         numeroChanchuno="";
         nombreChancho="";
         Iterator<Map.Entry<String,String>> iterator = jugadores.entrySet().iterator();
+
         while (iterator.hasNext()){
             Map.Entry<String,String> e = iterator.next();
             numeroChanchuno=e.getKey();
@@ -143,6 +164,31 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         notifyDataSetChanged();
     }
 
+    private void lanzartutorial(partidaViewHolder holder) {
+
+        v1 = new FancyShowCaseView.Builder((Activity) contexto)
+//                .focusRectAtPosition((int)x,(int)y,(int)w,(int)h+50)
+//                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .focusOn(holder.cv)
+                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        TextView tv= (TextView) view.findViewById(R.id.cuerpo);
+                        tv.setText("Presiona para agregar una letra y mantene apretado para quitar letras");
+                        view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                v1.hide();
+                            }
+                        });
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+        new FancyShowCaseQueue().add(v1).show();
+    }
+
     @Override
     public void onLongItemClick(View v, partidaViewHolder holder) {
         if (holder.chancho.length()>0 && holder.chancho.length()<11 ){
@@ -166,8 +212,11 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         public TextView chancho;
         public itemClickListener listener;
         public String numeroChancho;
+        CardView cv;
+
         public partidaViewHolder(View v, itemClickListener listener){
             super(v);
+            cv = (CardView)v.findViewById(R.id.cardboardJugador);
             foto= (ImageView)v.findViewById(R.id.fotocarnet);
             chanchoFondo = (TextView)v.findViewById(R.id.tvchanchoVacio);
             nom = (TextView) v.findViewById(R.id.tvNombreJugadorPartida);

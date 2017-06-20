@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         lista.setLayoutManager(layoutManager);
 
-        adapter = new jugadorAdapter(jugadors);
+        adapter = new jugadorAdapter(jugadors,this);
         lista.setAdapter(adapter);
 
         etNombre = (EditText) findViewById(R.id.etNombreJugador);
@@ -61,11 +61,8 @@ public class MainActivity extends AppCompatActivity {
             .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
                 @Override
                 public void onViewInflated(View view) {
-                    int t = 1;
                     TextView tv= (TextView) view.findViewById(R.id.cuerpo);
-                    String s ="tutorial0"+t;
-                    int id = getResources().getIdentifier(s,"string",getPackageName());
-                    tv.setText(id);
+                    tv.setText(R.string.tutorial01);
                     view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -74,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             })
+//            .focusCircleAtPosition(40,160,400)
             .closeOnTouch(false)
             .build();
         v2 = new FancyShowCaseView.Builder(this)

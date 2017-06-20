@@ -13,8 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.OnViewInflateListener;
 
 public class partida extends AppCompatActivity {
 
@@ -22,6 +28,8 @@ public class partida extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
     public ArrayList<String> jugadors;
+    FancyShowCaseView v1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,5 @@ public class partida extends AppCompatActivity {
 
         adapter = new partidaAdapter(jugadors,this);
         lista.setAdapter(adapter);
-
     }
 }
