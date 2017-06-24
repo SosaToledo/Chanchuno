@@ -3,6 +3,7 @@ package com.example.luciano.chanchuno;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,16 +28,20 @@ import me.toptas.fancyshowcase.OnViewInflateListener;
 
 
 public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaViewHolder> implements itemClickListener{
-    private final Context contexto;
+    private static Context contexto;
     private CharSequence palabra = "CHANCHO";
     private List<String> jugadors;
     private List<Integer> numer = new ArrayList<>();
     private Map<String,String>jugadores = new HashMap<>();
-    private FancyShowCaseView v1,v2;
+    private static FancyShowCaseView v1;
+    private FancyShowCaseView v2;
+    private SharedPreferences preferences;
+    public static partidaViewHolder holderGuardado;
 
     public partidaAdapter(List<String> jugadors, Context context) {
         this.jugadors = jugadors;
         this.contexto = context;
+        this.preferences=context.getSharedPreferences("config",Context.MODE_PRIVATE);
     }
 
     @Override
@@ -56,18 +61,22 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         holder.chanchoFondo.setText("CHANCHO");
         holder.foto.setAlpha(1f);
         jugadores.put(s,holder.nom.getText().toString());
-        System.out.println(position);
-        if (position==1){
+        if (position<=1){
+            holderGuardado = holder;
+        }
+        if (position==1 && preferences.getBoolean("tutorial02",true)){
+            holderGuardado=holder;
             holder.chancho.getViewTreeObserver().addOnGlobalLayoutListener(
                     new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
                             // Layout has happened here.
-                            // Don't forget to remove your listener when you are done with it.
-                            lanzartutorial(holder);
+                            lanzartutorial();
                             holder.chancho.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                            // Don't forget to remove your listener when you are done with it.
                         }
                     });
+            preferences.edit().putBoolean("tutorial02",false).apply();
         }
     }
 
@@ -164,11 +173,9 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         notifyDataSetChanged();
     }
 
-    private void lanzartutorial(partidaViewHolder holder) {
-
+    public static void lanzartutorial() {
+        partidaViewHolder holder = holderGuardado;
         v1 = new FancyShowCaseView.Builder((Activity) contexto)
-//                .focusRectAtPosition((int)x,(int)y,(int)w,(int)h+50)
-//                .focusShape(FocusShape.ROUNDED_RECTANGLE)
                 .focusOn(holder.cv)
                 .focusShape(FocusShape.ROUNDED_RECTANGLE)
                 .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
@@ -202,7 +209,6 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         }
     }
 
-
     public static class partidaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         private CharSequence palabra = "CHANCHO";
         public ImageView foto;
@@ -212,7 +218,7 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         public TextView chancho;
         public itemClickListener listener;
         public String numeroChancho;
-        CardView cv;
+        public CardView cv;
 
         public partidaViewHolder(View v, itemClickListener listener){
             super(v);

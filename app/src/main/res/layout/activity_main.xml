@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/ingresar_nombre_de_jugador"
         android:inputType="text"
+        android:layout_margin="10dp"
         android:maxLength="20"
         android:maxLines="1"
         android:textSize="20sp"

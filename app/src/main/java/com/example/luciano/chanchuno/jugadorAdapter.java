@@ -1,20 +1,25 @@
 package com.example.luciano.chanchuno;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.List;
+import me.toptas.fancyshowcase.FancyShowCaseQueue;
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.FocusShape;
+import me.toptas.fancyshowcase.OnViewInflateListener;
 
 /**
  * Created by luciano on 23/05/17.
@@ -22,13 +27,17 @@ import java.util.List;
 
 public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorViewHolder> implements itemClickListenerJugadores {
 
-    private final Context contexto;
+    private static Context contexto;
     private List<String> jugadors;
-
+    private SharedPreferences preferences;
+    private static FancyShowCaseView v2;
+    //Guardamos un holder para usarlo en el tutorial despues
+    private static jugadorViewHolder holderGuardado;
 
     public jugadorAdapter(List<String> jugadors, Context contexto) {
         this.jugadors = jugadors;
         this.contexto = contexto;
+        this.preferences=contexto.getSharedPreferences("config",Context.MODE_PRIVATE);
     }
 
     @Override
@@ -38,10 +47,65 @@ public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorV
     }
 
     @Override
-    public void onBindViewHolder(jugadorViewHolder holder, int position) {
+    public void onBindViewHolder(final jugadorViewHolder holder, int position) {
         holder.nom.setText(jugadors.get(position));
-    }
+        if (position<=1){
+            holderGuardado = holder;
+        }
+        if (preferences.getBoolean("tutorial01", true) && position==1){
+            holderGuardado = holder;
+            Activity act= (Activity) contexto;
+            InputMethodManager imm = (InputMethodManager)contexto.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(act.getCurrentFocus().getWindowToken(),0);
+            final Handler handler = new Handler();
+            holder.editar.getViewTreeObserver().addOnGlobalLayoutListener(
+                    new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            // Layout has happened here.
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    llamarTutorial();
+                                }
+                            },1000);
+                            holder.editar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                            // Don't forget to remove your listener when you are done with it.
+                        }
+                    });
 
+
+            preferences.edit().putBoolean("tutorial01",false).apply();
+        }
+    }
+    public void llamarTutorial(){
+        new FancyShowCaseQueue().add(obtenerCases()).show();
+    }
+    public static FancyShowCaseView obtenerCases(){
+
+        jugadorViewHolder holder = holderGuardado;
+
+        v2 = new FancyShowCaseView.Builder((Activity) contexto)
+                .focusOn(holder.nom)
+                .fitSystemWindows(false)
+                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        TextView tv = (TextView) view.findViewById(R.id.cuerpo);
+                        tv.setText("Manten presionado para borrar un jugador y presiona en el lapiz para editar su nombre");
+                        view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                v2.hide();
+                            }
+                        });
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+        return v2;
+    }
     @Override
     public int getItemCount() {
         return jugadors.size();
@@ -89,7 +153,6 @@ public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorV
             }
         });
     }
-
 
     public static class jugadorViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         public TextView nom;

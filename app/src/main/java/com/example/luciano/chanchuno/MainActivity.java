@@ -4,20 +4,26 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
-
 import me.toptas.fancyshowcase.FancyShowCaseQueue;
 import me.toptas.fancyshowcase.FancyShowCaseView;
 import me.toptas.fancyshowcase.OnViewInflateListener;
@@ -27,17 +33,122 @@ public class MainActivity extends AppCompatActivity {
     private Button btnagregar;
     private FloatingActionButton btncomenzar;
 
-    public static RecyclerView.Adapter adapter;
+    private jugadorAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
 
     public static ArrayList<String> jugadors = new ArrayList<>();
-    FancyShowCaseView v1,v2,v3;
+    private FancyShowCaseView v1,v2,v3;
+    private SharedPreferences preferences;
+    private Toolbar toolbar;
+
+    public static boolean t0=false;
+    public static boolean t1=false;
+    public static boolean t2=false;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_general,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.menuItem01:
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (adapter.getItemCount()>0){
+                            tutorialcompleto();
+                        }else{
+                            llamarAlTutorial();
+                        }
+                        }
+                },1000);
+                preferences.edit()
+                        .putBoolean("tutorial02",true)
+                        .commit();
+                return true;
+
+            case R.id.menuItem02:
+                Toast.makeText(this, "Item 02", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.menuItem03:
+                Toast.makeText(this, "Item 03", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void tutorialcompleto() {
+        v1 = new FancyShowCaseView.Builder(this)
+                .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        TextView tv= (TextView) view.findViewById(R.id.cuerpo);
+                        tv.setText(R.string.tutorial01);
+                        view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                v1.hide();
+                            }
+                        });
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+        v2 = new FancyShowCaseView.Builder(this)
+                .focusOn(btnagregar)
+                .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        TextView tv= (TextView) view.findViewById(R.id.cuerpo);
+                        tv.setText(R.string.tutorial02);
+                        view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                v2.hide();
+                            }
+                        });
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+        v3 = new FancyShowCaseView.Builder(this)
+                .focusOn(btncomenzar)
+                .customView(R.layout.custom_tutorial, new OnViewInflateListener() {
+                    @Override
+                    public void onViewInflated(View view) {
+                        TextView tv= (TextView) view.findViewById(R.id.cuerpo);
+                        tv.setText(R.string.tutorial03);
+                        view.findViewById(R.id.closebutton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                v3.hide();
+                            }
+                        });
+                    }
+                })
+                .closeOnTouch(false)
+                .build();
+
+        new FancyShowCaseQueue ().add(v1).add(v2).add(jugadorAdapter.obtenerCases()).add(v3).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         jugadors = new ArrayList<>();
 
@@ -53,7 +164,15 @@ public class MainActivity extends AppCompatActivity {
         etNombre = (EditText) findViewById(R.id.etNombreJugador);
         btnagregar = (Button)findViewById(R.id.btnAgregar);
         btncomenzar = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
-        llamarAlTutorial();
+
+        preferences = getSharedPreferences("config",Context.MODE_PRIVATE);
+        boolean inicio = preferences.getBoolean("tutorial00",true);
+        if (inicio){
+            llamarAlTutorial();
+            preferences.edit().putBoolean("tutorial00",false).apply();
+        }
+        System.out.println(adapter.getItemCount()+" adapter");
+
     }
 
     private void llamarAlTutorial() {
@@ -71,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             })
-//            .focusCircleAtPosition(40,160,400)
             .closeOnTouch(false)
             .build();
         v2 = new FancyShowCaseView.Builder(this)
@@ -165,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public static void eliminar(String nombre) {
+    public void eliminar(String nombre) {
         jugadors.remove(nombre);
         adapter.notifyDataSetChanged();
     }
