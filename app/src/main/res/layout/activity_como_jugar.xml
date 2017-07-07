@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.luciano.chanchuno.comoJugar"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tituloComoJugar"
+        android:textAlignment="center"
+        android:textSize="@dimen/titulo"
+        android:padding="5px"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/comoJugarUno"
+                android:textSize="@dimen/parrafos"
+                android:padding="30px"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30px"
+                android:text="@string/comoJugarDos"
+                android:textSize="@dimen/parrafos" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/comoJugarTres"
+                android:textSize="@dimen/parrafos"
+                android:padding="30px"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/comoJugarPuntos"
+                android:textSize="@dimen/parrafos"
+                android:padding="30px"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

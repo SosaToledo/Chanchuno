@@ -20,4 +20,10 @@
     <string name="menuItem01">Iniciar tutorial</string>
     <string name="MenuItem02">Como se juega</string>
     <string name="MenuItem03">Acerca de nosotros</string>
+    <string name="tituloComoJugar">¿Cómo se juega al Chancho va?</string>
+    <string name="comoJugarUno">Primero se separan del maso tantos grupos de cuatro cartas del mismo número como participantes del juego.         (Ej. si son 4 jugadores, serán necesarios 4 grupos de 4 cartas:          por ejemplo cuatro cartas del número 1, 2, 3 y 4.) Luego se mezclan las cartas y se reparten         entre los jugadores de modo que todos reciban 4 cartas.</string>
+    <string name="comoJugarDos">Paso seguido cada jugador desliza una carta boca abajo al jugador de su derecha diciendo “Chancho Va”         en el momento (la orden de “chancho va” la dá un jugador por vez, en sentido de las agujas del reloj),         se esperan unos segundos a que todos observen y acomoden sus juegos y se continúa de la misma forma hasta         que el primer participante que obtenga las cuatro cartas del mismo numero grite CHANCHO         y coloque la mano en el centro de la mesa, los demás jugadores deberán ser lo suficientemente rápidos y         atentos para colocar su mano arriba de la del jugador que logró el chancho.</string>
+    <string name="comoJugarTres">El ultimo que coloque la mano es el que pierde y se lleva una letra.</string>
+    <string name="comoJugarPuntos">La puntuación es con letras, primero la C, luego la H y así sucesivamente hasta que alguno de los jugadores         forme la palabra “chancho”.</string>
+    <string name="Thinco">[Think in code]</string>
 </resources>

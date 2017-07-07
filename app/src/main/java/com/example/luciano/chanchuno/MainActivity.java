@@ -76,11 +76,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menuItem02:
-                Toast.makeText(this, "Item 02", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, comoJugar.class);
+                startActivity(intent);
                 return true;
 
             case R.id.menuItem03:
-                Toast.makeText(this, "Item 03", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(this, quienesSomos.class);
+                startActivity(intent1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
