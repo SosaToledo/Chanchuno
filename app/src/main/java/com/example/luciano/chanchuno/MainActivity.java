@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public static boolean t0=false;
     public static boolean t1=false;
     public static boolean t2=false;
+
+    private boolean borrar=false;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,9 +85,37 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menuItem03:
-                Intent intent1 = new Intent(this, quienesSomos.class);
-                startActivity(intent1);
-                return true;
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View v = layoutInflater.inflate(R.layout.quienessomos,null);
+
+                builder.setView(v);
+
+                ImageView bt = (ImageView)v.findViewById(R.id.twitterLogo);
+                ImageView bf = (ImageView)v.findViewById(R.id.facebookLogo);
+
+                final AlertDialog a = builder.create();
+                a.setCancelable(true);
+                a.show();
+
+                bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse("https://twitter.com/Think_In_Code");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                });
+
+                bf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse("https://www.facebook.com/thinkincode");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                });
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -272,6 +304,7 @@ public class MainActivity extends AppCompatActivity {
             });
             dialog.show();
         }else {
+            borrar = true;
             Intent intent = new Intent(this, partida.class);
             intent.putExtra("jugadores", jugadors);
             startActivity(intent);
@@ -281,8 +314,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        jugadors.clear();
-        adapter.notifyDataSetChanged();
+        if (borrar){
+            jugadors.clear();
+            adapter.notifyDataSetChanged();
+            borrar=false;
+        }
     }
 
     public void eliminar(String nombre) {

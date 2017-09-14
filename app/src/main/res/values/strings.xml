@@ -26,4 +26,6 @@
     <string name="comoJugarTres">El ultimo que coloque la mano es el que pierde y se lleva una letra.</string>
     <string name="comoJugarPuntos">La puntuación es con letras, primero la C, luego la H y así sucesivamente hasta que alguno de los jugadores         forme la palabra “chancho”.</string>
     <string name="Thinco">[Think in code]</string>
+    <string name="pieLegal">Desarrollado en 2017, en Buenos Aires, Argentina por Thinco. Todos los derechos reservados.</string>
+    <string name="quienes_somos">Somos Thinco una empresa dedicada al desarrollo de aplicaciones de celular, paginas web y sistemas de escritorio.</string>
 </resources>

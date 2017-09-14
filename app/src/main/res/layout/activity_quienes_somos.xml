@@ -4,9 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.luciano.chanchuno.quienesSomos"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo" />
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="88dp"
-        android:src="@drawable/logo" />
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pieLegal"/>
 </LinearLayout>

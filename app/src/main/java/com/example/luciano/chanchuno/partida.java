@@ -3,6 +3,7 @@ package com.example.luciano.chanchuno;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,12 +53,41 @@ public class partida extends AppCompatActivity {
                 partidaAdapter.lanzartutorial();
                 return true;
             case R.id.menuItem02:
-                Toast.makeText(this, "Item 02", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, comoJugar.class);
+                startActivity(intent);
                 return true;
-
             case R.id.menuItem03:
-                Toast.makeText(this, "Item 03", Toast.LENGTH_SHORT).show();
-                return true;
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View v = layoutInflater.inflate(R.layout.quienessomos,null);
+
+                builder.setView(v);
+
+                ImageView bt = (ImageView)v.findViewById(R.id.twitterLogo);
+                ImageView bf = (ImageView)v.findViewById(R.id.facebookLogo);
+
+                final AlertDialog a = builder.create();
+                a.setCancelable(true);
+                a.show();
+
+                bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse("https://twitter.com/Think_In_Code");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                });
+
+                bf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse("https://www.facebook.com/thinkincode");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                });
             default:
                 return super.onOptionsItemSelected(item);
         }

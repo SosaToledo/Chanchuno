@@ -9,6 +9,6 @@
     <dimen name="button_padding">8dp</dimen>
     <dimen name="normal_padding">8dp</dimen>
     <dimen name="edit_text_padding">8dp</dimen>
-    <dimen name="titulo">35dp</dimen>
-    <dimen name="parrafos">17dp</dimen>
+    <dimen name="titulo">35sp</dimen>
+    <dimen name="parrafos">17sp</dimen>
 </resources>
