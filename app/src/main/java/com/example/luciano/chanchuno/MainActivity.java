@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etNombre;
     private Button btnagregar;
     private FloatingActionButton btncomenzar;
-
+    private String TAG ="MIAPP";
     private jugadorAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
@@ -62,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
         switch (id){
             case R.id.menuItem01:
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                try {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                }catch (NullPointerException e){
+                    Log.d(TAG, "onOptionsItemSelected: NullpointerException: "+e.getMessage());
+                }
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
