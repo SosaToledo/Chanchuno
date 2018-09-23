@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,13 +126,32 @@ public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorV
         View v = layoutInflater.inflate(R.layout.editar_nombre,null);
         builder.setView(v);
 
-        Button cambiarNombre = (Button)v.findViewById(R.id.btnCambiarNombre);
+        final Button cambiarNombre = (Button)v.findViewById(R.id.btnCambiarNombre);
         Button salir = (Button) v.findViewById(R.id.btnCancelarCambiarNombre);
         final EditText campo = (EditText) v.findViewById(R.id.etCambiarNombre);
 
         final android.app.AlertDialog a = builder.create();
         a.setCancelable(true);
         a.show();
+
+
+        //Listener for change de propertie "enabled" of botton "cambiarNombre"
+        campo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                cambiarNombre.setEnabled(true);
+            }
+        });
 
         cambiarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
