@@ -149,7 +149,11 @@ public class jugadorAdapter extends RecyclerView.Adapter<jugadorAdapter.jugadorV
 
             @Override
             public void afterTextChanged(Editable editable) {
-                cambiarNombre.setEnabled(true);
+                if (campo.getText().toString().equals("")){
+                    cambiarNombre.setEnabled(false);
+                }else{
+                    cambiarNombre.setEnabled(true);
+                }
             }
         });
 
