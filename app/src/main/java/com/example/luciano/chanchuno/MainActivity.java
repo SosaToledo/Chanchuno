@@ -31,6 +31,11 @@ import me.toptas.fancyshowcase.FancyShowCaseQueue;
 import me.toptas.fancyshowcase.FancyShowCaseView;
 import me.toptas.fancyshowcase.OnViewInflateListener;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class MainActivity extends AppCompatActivity {
     private EditText etNombre;
     private Button btnagregar;
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private jugadorAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView lista;
+
+    private AdView mAdView;
 
     public static ArrayList<String> jugadors = new ArrayList<>();
     private FancyShowCaseView v1,v2,v3;
@@ -50,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     public static boolean t2=false;
 
     private boolean borrar=false;
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -211,6 +220,18 @@ public class MainActivity extends AppCompatActivity {
             preferences.edit().putBoolean("tutorial00",false).apply();
         }
         System.out.println(adapter.getItemCount()+" adapter");
+
+        //Publicidad
+        // Sample AdMob app ID: ca-app-pub-6353529381545594~4437099656
+        MobileAds.initialize(this, "ca-app-pub-6353529381545594~4437099656");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        //Analitycs
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
     }
 
