@@ -31,6 +31,7 @@ import me.toptas.fancyshowcase.FancyShowCaseQueue;
 import me.toptas.fancyshowcase.FancyShowCaseView;
 import me.toptas.fancyshowcase.OnViewInflateListener;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -59,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean borrar=false;
 
     private FirebaseAnalytics mFirebaseAnalytics;
+
+
+    private InterstitialAd mIntersitialAd;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -225,11 +229,18 @@ public class MainActivity extends AppCompatActivity {
         // Sample AdMob app ID: ca-app-pub-6353529381545594~4437099656
         MobileAds.initialize(this, "ca-app-pub-6353529381545594~4437099656");
 
+        //Carga de Banner
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        //Analitycs
+        //Carga de Intersitial
+        mIntersitialAd = new InterstitialAd(this);
+        mIntersitialAd.setAdUnitId("ca-app-pub-6353529381545594/8812696345");
+        AdRequest request = new AdRequest.Builder().build();
+        mIntersitialAd.loadAd(request);
+
+        //Analytics
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -330,6 +341,7 @@ public class MainActivity extends AppCompatActivity {
             });
             dialog.show();
         }else {
+            llamarPublicidad();
             borrar = true;
             Intent intent = new Intent(this, partida.class);
             intent.putExtra("jugadores", jugadors);
@@ -337,6 +349,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void llamarPublicidad() {
+
+        if (mIntersitialAd.isLoaded()){
+            mIntersitialAd.show();
+        }else{
+            Log.d("pueba de Publicidad", "no carga la publicidad.");
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();

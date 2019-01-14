@@ -27,6 +27,11 @@ import me.toptas.fancyshowcase.FocusShape;
 import me.toptas.fancyshowcase.OnViewInflateListener;
 
 
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
+
 public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaViewHolder> implements itemClickListener{
     private static Context contexto;
     private CharSequence palabra = "CHANCHO";
@@ -37,6 +42,8 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
     private FancyShowCaseView v2;
     private SharedPreferences preferences;
     public static partidaViewHolder holderGuardado;
+
+
 
     public partidaAdapter(List<String> jugadors, Context context) {
         this.jugadors = jugadors;
@@ -118,6 +125,9 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
     }
 
     private void mostrarGanador() {
+
+
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
         LayoutInflater layoutInflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = layoutInflater.inflate(R.layout.ganador,null);
@@ -127,6 +137,10 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
         numeroChanchuno="";
         nombreChancho="";
         Iterator<Map.Entry<String,String>> iterator = jugadores.entrySet().iterator();
+
+
+
+
 
         while (iterator.hasNext()){
             Map.Entry<String,String> e = iterator.next();
@@ -164,6 +178,8 @@ public class partidaAdapter extends RecyclerView.Adapter<partidaAdapter.partidaV
             }
         });
     }
+
+
 
     private void reiniciar() {
         jugadores.clear();

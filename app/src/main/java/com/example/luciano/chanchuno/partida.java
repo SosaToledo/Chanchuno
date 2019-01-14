@@ -30,6 +30,7 @@ import me.toptas.fancyshowcase.FancyShowCaseQueue;
 import me.toptas.fancyshowcase.FancyShowCaseView;
 import me.toptas.fancyshowcase.OnViewInflateListener;
 
+
 public class partida extends AppCompatActivity {
 
     public RecyclerView.Adapter adapter;
@@ -38,6 +39,7 @@ public class partida extends AppCompatActivity {
     public ArrayList<String> jugadors;
     private FancyShowCaseView v1;
     private Toolbar toolbar;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,5 +114,9 @@ public class partida extends AppCompatActivity {
 
         adapter = new partidaAdapter(jugadors,this);
         lista.setAdapter(adapter);
+
+
+
+
     }
 }
