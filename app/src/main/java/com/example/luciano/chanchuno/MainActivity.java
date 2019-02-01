@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +34,6 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etNombre;
@@ -58,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
     public static boolean t2=false;
 
     private boolean borrar=false;
-
-    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     private InterstitialAd mIntersitialAd;
@@ -240,9 +236,6 @@ public class MainActivity extends AppCompatActivity {
         AdRequest request = new AdRequest.Builder().build();
         mIntersitialAd.loadAd(request);
 
-        //Analytics
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
     }
 
@@ -341,20 +334,10 @@ public class MainActivity extends AppCompatActivity {
             });
             dialog.show();
         }else {
-            llamarPublicidad();
             borrar = true;
             Intent intent = new Intent(this, partida.class);
             intent.putExtra("jugadores", jugadors);
             startActivity(intent);
-        }
-    }
-
-    private void llamarPublicidad() {
-
-        if (mIntersitialAd.isLoaded()){
-            mIntersitialAd.show();
-        }else{
-            Log.d("pueba de Publicidad", "no carga la publicidad.");
         }
     }
     @Override

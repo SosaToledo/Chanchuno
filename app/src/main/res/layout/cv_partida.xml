@@ -10,7 +10,6 @@
         android:layout_weight="0.02"
         app:cardCornerRadius="@dimen/radioCardView"
         android:layout_margin="@dimen/margenCardView"
-        android:onClick="cargarLetra"
         >
 
         <RelativeLayout

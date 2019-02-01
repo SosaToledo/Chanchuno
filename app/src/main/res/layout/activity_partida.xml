@@ -21,10 +21,16 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.RecyclerView
+        <ListView
             android:layout_below="@+id/toolbar2"
-            android:id="@+id/rvPartida"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:id="@+id/lv_partida"
+            android:layout_height="match_parent" />
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:layout_below="@+id/toolbar2"-->
+            <!--android:id="@+id/rvPartida"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"/>-->
 
 </RelativeLayout>
