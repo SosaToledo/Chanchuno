@@ -13,10 +13,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 
-
 public class partida extends AppCompatActivity {
+
+    private InterstitialAd mInterstitialAd;
 
     private ListView lista;
     //La primera columna de la matriz contiene los nombres de los jugadores
@@ -92,6 +97,10 @@ public class partida extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partida);
 
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
 //        Toolbar toolbar = findViewById(R.id.toolbar2);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -141,6 +150,8 @@ public class partida extends AppCompatActivity {
                     tvChancho.setText(CHANCHO_PERDIO);
                     jugadores[position][1] = CHANCHO_PERDIO;
                     adapter.notifyDataSetChanged();
+                    mostrarAnuncio();
+                    crearAnuncio();
                     //se crea un backup para eliminar jugadores con el fin de saber cual es el ultimo que queda
                     String jugadorEliminado = tvNombre.getText().toString();
                     jugadoresBackUp.add(jugadorEliminado);
@@ -207,6 +218,21 @@ public class partida extends AppCompatActivity {
         });
     }
 
+    private void mostrarAnuncio(){
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
+    }
+    private void crearAnuncio(){
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdClosed(){
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+    }
     private void reiniciar() {
         for (int i = 0; i<jugadoresBackUp.size(); i++) {
             jugadores[i][0] = jugadoresBackUp.get(i);
