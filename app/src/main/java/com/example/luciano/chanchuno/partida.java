@@ -98,7 +98,7 @@ public class partida extends AppCompatActivity {
         setContentView(R.layout.activity_partida);
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-6353529381545594/6925206786");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
 //        Toolbar toolbar = findViewById(R.id.toolbar2);
