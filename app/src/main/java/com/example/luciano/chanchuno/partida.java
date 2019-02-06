@@ -15,11 +15,15 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
 public class partida extends AppCompatActivity {
+
+    private AdView adView;
 
     private InterstitialAd mInterstitialAd;
 
@@ -100,6 +104,12 @@ public class partida extends AppCompatActivity {
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-6353529381545594/6925206786");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        MobileAds.initialize(this, "ca-app-pub-6353529381545594~4437099656");
+
+        adView = findViewById(R.id.ad_partida);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
 //        Toolbar toolbar = findViewById(R.id.toolbar2);
 //        setSupportActionBar(toolbar);
