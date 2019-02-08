@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -117,10 +118,11 @@ public class partida extends AppCompatActivity {
 
         jugadors = getIntent().getStringArrayListExtra("jugadores");
         //Inicializo la Matriz y lugo la cargo con los jugadores y CHANCHO vacio.
-        jugadores = new String[jugadors.size()][2];
+        jugadores = new String[jugadors.size()][3];
         for (int i = 0; i<jugadors.size(); i++){
             jugadores[i][0] = jugadors.get(i);
             jugadores[i][1] = "";
+            jugadores[i][2] = "pig1";
         }
 
         lista = findViewById(R.id.lv_partida);
@@ -146,12 +148,15 @@ public class partida extends AppCompatActivity {
                     switch (posicion){
                         case 2:
                             imagenChancho.setImageResource(R.drawable.pig3);
+                            jugadores[position][2] = "pig3";
                             break;
                         case 4:
                             imagenChancho.setImageResource(R.drawable.pig6);
+                            jugadores[position][2] = "pig6";
                             break;
                         case 5:
                             imagenChancho.setImageResource(R.drawable.pig5);
+                            jugadores[position][2] = "pig5";
                             break;
                     }
                 }
@@ -247,6 +252,7 @@ public class partida extends AppCompatActivity {
         for (int i = 0; i<jugadoresBackUp.size(); i++) {
             jugadores[i][0] = jugadoresBackUp.get(i);
             jugadores[i][1] = "";
+            jugadores[i][2] = "pig1";
         }
         jugadors.clear();
         jugadors.addAll(jugadoresBackUp);

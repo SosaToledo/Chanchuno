@@ -2,6 +2,7 @@ package com.example.luciano.chanchuno;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +53,10 @@ public class PartidaBaseAdapter extends BaseAdapter {
 
         nombrejugador.setText(item[position][0]);
         chancho.setText(item[position][1]);
-        imageView.setImageResource(R.drawable.pig1);
+        int res_imagen = context.getResources().getIdentifier("drawable/" + item[position][2], null, context.getPackageName());
+        imageView.setImageResource(res_imagen);
 
+//        imageView.setImageResource(Integer.valueOf(item[position][2]));
 
         return vista;
     }
