@@ -40,63 +40,6 @@ public class partida extends AppCompatActivity {
     private final String CHANCHO_PERDIO = "CHANCHO VA!";
     private PartidaBaseAdapter adapter;
 
-//    private final String PRUEBA = "PRUEBA";
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_general,menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        switch (id){
-//            case R.id.menuItem01:
-//                partidaAdapter.lanzartutorial();
-//                return true;
-//            case R.id.menuItem02:
-//                Intent intent = new Intent(this, comoJugar.class);
-//                startActivity(intent);
-//                return true;
-//            case R.id.menuItem03:
-//
-//                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                assert layoutInflater != null;
-//                View v = layoutInflater.inflate(R.layout.quienessomos,null);
-//
-//                builder.setView(v);
-//
-//                ImageView bt = (ImageView)v.findViewById(R.id.twitterLogo);
-//                ImageView bf = (ImageView)v.findViewById(R.id.facebookLogo);
-//
-//                final AlertDialog a = builder.create();
-//                a.setCancelable(true);
-//                a.show();
-//
-//                bt.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Uri uri = Uri.parse("https://twitter.com/Think_In_Code");
-//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                        startActivity(intent);
-//                    }
-//                });
-//
-//                bf.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Uri uri = Uri.parse("https://www.facebook.com/thinkincode");
-//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                        startActivity(intent);
-//                    }
-//                });
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,10 +54,6 @@ public class partida extends AppCompatActivity {
         adView = findViewById(R.id.ad_partida);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-
-//        Toolbar toolbar = findViewById(R.id.toolbar2);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         jugadors = getIntent().getStringArrayListExtra("jugadores");
         //Inicializo la Matriz y lugo la cargo con los jugadores y CHANCHO vacio.

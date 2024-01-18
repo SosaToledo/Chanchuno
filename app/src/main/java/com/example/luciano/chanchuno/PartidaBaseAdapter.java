@@ -56,8 +56,6 @@ public class PartidaBaseAdapter extends BaseAdapter {
         int res_imagen = context.getResources().getIdentifier("drawable/" + item[position][2], null, context.getPackageName());
         imageView.setImageResource(res_imagen);
 
-//        imageView.setImageResource(Integer.valueOf(item[position][2]));
-
         return vista;
     }
 }
