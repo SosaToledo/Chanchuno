@@ -122,7 +122,7 @@ public class partida extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tvChancho = view.findViewById(R.id.tvchancho);
                 int posicion = tvChancho.getText().length();
-                if (posicion>=0 && posicion<=7){
+                if (posicion>0 && posicion<=7){
                     String prueba = CHANCHO_NOMBRE.substring(0, posicion-1) ;
                     tvChancho.setText(prueba);
                     jugadores[position][1] = prueba;
