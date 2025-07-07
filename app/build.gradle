@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
     defaultConfig {
         applicationId "ar.com.thinkincode.luciano.chanchuno"
-        minSdkVersion 19
+        minSdkVersion 23
         //noinspection EditedTargetSdkVersion
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 6
-        versionName "1.6"
+        versionName "1.9"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
@@ -19,6 +19,16 @@ android {
         }
     }
     namespace 'com.example.luciano.chanchuno'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8 // Or your desired Java version
+        targetCompatibility JavaVersion.VERSION_1_8 // Or your desired Java version
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8" // Match the Java version
+    }
+
 }
 
 dependencies {
@@ -26,14 +36,14 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.faruktoptas:FancyShowCaseView:1.0.1'
     testImplementation 'junit:junit:4.13.2'
-    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+    implementation 'com.google.android.gms:play-services-ads:24.4.0'
 
     implementation 'com.google.firebase:firebase-core:21.1.1'
 

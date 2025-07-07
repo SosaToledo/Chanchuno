@@ -1,6 +1,5 @@
 package com.example.luciano.chanchuno
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -29,20 +28,19 @@ class PartidaBaseAdapter internal constructor(
         return 0
     }
 
-    override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
-        @SuppressLint("ViewHolder", "InflateParams") val vista =
-            view!!.inflate(R.layout.cv_partida, null)
-        val imageView = vista.findViewById<ImageView>(R.id.fotocarnet)
-        val nombrejugador = vista.findViewById<TextView>(R.id.tvNombreJugadorPartida)
-        val chancho = vista.findViewById<TextView>(R.id.tvchancho)
-        nombrejugador.text = item[position][0]
-        chancho.text = item[position][1]
-        val res_imagen = context.resources.getIdentifier(
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        val vista = view?.inflate(R.layout.cv_partida, null)
+        val imageView = vista?.findViewById<ImageView>(R.id.fotocarnet)
+        val nombrejugador = vista?.findViewById<TextView>(R.id.tvNombreJugadorPartida)
+        val chancho = vista?.findViewById<TextView>(R.id.tvchancho)
+        nombrejugador?.text = item[position][0]
+        chancho?.text = item[position][1]
+        val resImagen = context.resources.getIdentifier(
             "drawable/" + item[position][2],
             null,
             context.packageName
         )
-        imageView.setImageResource(res_imagen)
+        imageView?.setImageResource(resImagen)
         return vista
     }
 
