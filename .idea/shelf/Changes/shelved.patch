@@ -1,0 +1,89 @@
+Index: .idea/modules.xml
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+deleted file mode 100644
+--- a/.idea/modules.xml	(revision 992b887e3f94ec8213f93c2ca735d5345ce94351)
++++ /dev/null	(revision 992b887e3f94ec8213f93c2ca735d5345ce94351)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chanchuno.iml" filepath="$PROJECT_DIR$/.idea/modules/Chanchuno.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.androidTest.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.main.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Chanchuno.app.unitTest.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <bytecodeTargetLevel target=\"17\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 992b887e3f94ec8213f93c2ca735d5345ce94351)
++++ b/.idea/compiler.xml	(date 1751839678928)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="17" />
++    <bytecodeTargetLevel target="21" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleJvm\" value=\"#GRADLE_LOCAL_JAVA_HOME\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n          </set>\n        </option>\n        <option name=\"resolveExternalAnnotations\" value=\"false\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 992b887e3f94ec8213f93c2ca735d5345ce94351)
++++ b/.idea/gradle.xml	(date 1751839201914)
+@@ -4,6 +4,7 @@
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
++        <option name="testRunner" value="CHOOSE_PER_TEST" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+         <option name="modules">
+@@ -12,7 +13,6 @@
+             <option value="$PROJECT_DIR$/app" />
+           </set>
+         </option>
+-        <option name="resolveExternalAnnotations" value="false" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><project version=\"4\">\n  <component name=\"NullableNotNullManager\">\n    <option name=\"myDefaultNullable\" value=\"android.support.annotation.Nullable\" />\n    <option name=\"myDefaultNotNull\" value=\"android.support.annotation.NonNull\" />\n    <option name=\"myNullables\">\n      <value>\n        <list size=\"10\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.Nullable\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nullable\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"javax.annotation.CheckForNull\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.Nullable\" />\n          <item index=\"4\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.Nullable\" />\n          <item index=\"5\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.Nullable\" />\n          <item index=\"6\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.RecentlyNullable\" />\n          <item index=\"7\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.qual.Nullable\" />\n          <item index=\"8\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NullableDecl\" />\n          <item index=\"9\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NullableType\" />\n        </list>\n      </value>\n    </option>\n    <option name=\"myNotNulls\">\n      <value>\n        <list size=\"9\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.NotNull\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nonnull\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.NonNull\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.NonNull\" />\n          <item index=\"4\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.NonNull\" />\n          <item index=\"5\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.RecentlyNonNull\" />\n          <item index=\"6\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.qual.NonNull\" />\n          <item index=\"7\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NonNullDecl\" />\n          <item index=\"8\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NonNullType\" />\n        </list>\n      </value>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"jbr-17\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 992b887e3f94ec8213f93c2ca735d5345ce94351)
++++ b/.idea/misc.xml	(date 1751839678921)
+@@ -1,3 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="NullableNotNullManager">
+     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
+@@ -34,7 +35,7 @@
+       </value>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">

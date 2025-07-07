@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="@style/AppTheme">
     <item
-        android:id="@+id/menuItem01"
-        android:orderInCategory="100"
-        android:title="@string/menuItem01"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/menuItem02"
         android:orderInCategory="101"
         android:title="@string/MenuItem02"

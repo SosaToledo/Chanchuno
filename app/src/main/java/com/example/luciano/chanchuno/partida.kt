@@ -93,10 +93,10 @@ class partida : AppCompatActivity() {
                 }
             }
         })
-        lista?.setOnItemLongClickListener(OnItemLongClickListener { parent, view, position, id ->
+        lista?.setOnItemLongClickListener { _, view, position, _ ->
             val tvChancho = view.findViewById<TextView>(R.id.tvchancho)
             val posicion = tvChancho.text.length
-            if (posicion > 0 && posicion <= 7) {
+            if (posicion in 1..7) {
                 val prueba = CHANCHO_NOMBRE.substring(0, posicion - 1)
                 tvChancho.text = prueba
                 jugadores[position][1] = prueba
@@ -106,7 +106,7 @@ class partida : AppCompatActivity() {
                 tvChancho.text = CHANCHO_NOMBRE.substring(0, 6)
             }
             true
-        })
+        }
     }
 
     private fun mostrarGanador() {
@@ -143,8 +143,4 @@ class partida : AppCompatActivity() {
         //Por alguna extraña razón que desconozco clear debe ir despues de la norificación.
         jugadoresBackUp.clear()
     }
-}
-
-private fun InterstitialAd.loadAd(build: AdRequest) {
-
 }
