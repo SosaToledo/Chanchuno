@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.luciano.chanchuno
 
 import android.app.AlertDialog
@@ -103,7 +101,6 @@ class MainActivity : AppCompatActivity() {
                 if (!jugadors.contains(playerName)) {
                     jugadors.add(playerName)
                     etNombre!!.setText("")
-                    //TODO: esto no se si es necesario. actualiza la lista en partida al parecer.
                     adapter?.notifyDataSetChanged()
                 } else {
                     Toast.makeText(
@@ -137,7 +134,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //TODO: esta función debería servir para eliminar a los jugadores de la lista cuando se vuelve de la partida.
     override fun onResume() {
         super.onResume()
         if (borrar) {
