@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.luciano.chanchuno
 
 import android.annotation.SuppressLint
@@ -7,7 +5,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Handler
 import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,14 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnLongClickListener
 import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.luciano.chanchuno.jugadorAdapter.jugadorViewHolder
-import me.toptas.fancyshowcase.FancyShowCaseQueue
 import me.toptas.fancyshowcase.FancyShowCaseView
 import me.toptas.fancyshowcase.FocusShape
 import me.toptas.fancyshowcase.OnViewInflateListener

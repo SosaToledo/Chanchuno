@@ -1,10 +1,7 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.luciano.chanchuno
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +16,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import com.google.android.gms.ads.AdView
-import me.toptas.fancyshowcase.FancyShowCaseView
 import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
@@ -73,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -103,7 +100,6 @@ class MainActivity : AppCompatActivity() {
                 if (!jugadors.contains(playerName)) {
                     jugadors.add(playerName)
                     etNombre!!.setText("")
-                    //TODO: esto no se si es necesario. actualiza la lista en partida al parecer.
                     adapter?.notifyDataSetChanged()
                 } else {
                     Toast.makeText(
@@ -137,11 +133,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //TODO: elimina los jugadores en partida si se sale de la app?
     override fun onResume() {
         super.onResume()
         if (borrar) {
             jugadors.clear()
+            adapter?.notifyDataSetChanged()
             borrar = false
         }
     }

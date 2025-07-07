@@ -140,7 +140,7 @@ class partida : AppCompatActivity() {
         jugadors!!.clear()
         jugadors!!.addAll(jugadoresBackUp)
         adapter!!.notifyDataSetChanged()
-        //Por alguna extraña razón que desconozco clear debe ir despues de la norificación.
+        //Por alguna extraña razón que desconozco clear debe ir despues de la notificación.
         jugadoresBackUp.clear()
     }
 }

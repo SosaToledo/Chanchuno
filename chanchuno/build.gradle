@@ -8,7 +8,7 @@ android {
         minSdkVersion 23
         //noinspection EditedTargetSdkVersion
         targetSdkVersion 35
-        versionCode 6
+        versionCode 8
         versionName "1.9"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
