@@ -17,7 +17,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.net.toUri
-import androidx.activity.addCallback
 
 class MainActivity : AppCompatActivity() {
     private var etNombre: EditText? = null
