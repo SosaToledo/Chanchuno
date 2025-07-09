@@ -11,19 +11,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 class partida : AppCompatActivity() {
-    private var adView: AdView? = null
-    private var mInterstitialAd: InterstitialAd? = null
     private var lista: ListView? = null
-    private final var TAG = "MainActivity"
 
 
     //La primera columna de la matriz contiene los nombres de los jugadores
@@ -39,8 +29,6 @@ class partida : AppCompatActivity() {
         setContentView(R.layout.activity_partida)
 
 
-        adView = findViewById(R.id.ad_partida)
-        val adRequest = AdRequest.Builder().build()
         jugadors = intent.getStringArrayListExtra("jugadores")
         //Inicializo la Matriz y lugo la cargo con los jugadores y CHANCHO vacio.
         jugadores = Array(jugadors?.size!!) { arrayOfNulls(3) }

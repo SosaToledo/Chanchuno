@@ -17,6 +17,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.net.toUri
+import androidx.compose.material3.Text
+
 
 class MainActivity : AppCompatActivity() {
     private var etNombre: EditText? = null
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private var lista: RecyclerView? = null
     private var toolbar: Toolbar? = null
     private var borrar = false
+    private var jugadors = ArrayList<String>()
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_general, menu)
         return true
@@ -67,8 +71,6 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,10 +142,5 @@ class MainActivity : AppCompatActivity() {
             adapter?.notifyDataSetChanged()
             borrar = false
         }
-    }
-
-    //TODO: revisar si es necesario o si se puede pasar por parametro.
-    companion object {
-        var jugadors = ArrayList<String>()
     }
 }
