@@ -1,5 +1,6 @@
 package com.example.luciano.chanchuno
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +19,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.net.toUri
 
+
 class MainActivity : AppCompatActivity() {
     private var etNombre: EditText? = null
     private var btnagregar: Button? = null
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private var lista: RecyclerView? = null
     private var toolbar: Toolbar? = null
     private var borrar = false
+    private var jugadors = ArrayList<String>()
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_general, menu)
         return true
@@ -68,8 +72,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -88,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         btncomenzar = findViewById<View>(R.id.floatingActionButton2) as FloatingActionButton
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun agregar(view: View?) {
         if (etNombre!!.text.toString().isEmpty()) {
             Toast.makeText(this, "Ingres algun nombre de jugador", Toast.LENGTH_SHORT).show()
@@ -140,10 +143,5 @@ class MainActivity : AppCompatActivity() {
             adapter?.notifyDataSetChanged()
             borrar = false
         }
-    }
-
-    //TODO: revisar si es necesario o si se puede pasar por parametro.
-    companion object {
-        var jugadors = ArrayList<String>()
     }
 }

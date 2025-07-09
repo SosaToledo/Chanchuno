@@ -3,27 +3,15 @@ package com.example.luciano.chanchuno
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 class partida : AppCompatActivity() {
-    private var adView: AdView? = null
-    private var mInterstitialAd: InterstitialAd? = null
     private var lista: ListView? = null
-    private final var TAG = "MainActivity"
 
 
     //La primera columna de la matriz contiene los nombres de los jugadores
@@ -39,8 +27,6 @@ class partida : AppCompatActivity() {
         setContentView(R.layout.activity_partida)
 
 
-        adView = findViewById(R.id.ad_partida)
-        val adRequest = AdRequest.Builder().build()
         jugadors = intent.getStringArrayListExtra("jugadores")
         //Inicializo la Matriz y lugo la cargo con los jugadores y CHANCHO vacio.
         jugadores = Array(jugadors?.size!!) { arrayOfNulls(3) }
@@ -52,7 +38,7 @@ class partida : AppCompatActivity() {
         lista = findViewById(R.id.lv_partida)
         adapter = PartidaBaseAdapter(jugadores, this)
         lista?.setAdapter(adapter)
-        lista?.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+        lista?.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             val tvChancho = view.findViewById<TextView>(R.id.tvchancho)
             val imagenChancho = view.findViewById<ImageView>(R.id.fotocarnet)
             val tvNombre = view.findViewById<TextView>(R.id.tvNombreJugadorPartida)
@@ -92,7 +78,7 @@ class partida : AppCompatActivity() {
                     mostrarGanador()
                 }
             }
-        })
+        }
         lista?.setOnItemLongClickListener { _, view, position, _ ->
             val tvChancho = view.findViewById<TextView>(R.id.tvchancho)
             val posicion = tvChancho.text.length
