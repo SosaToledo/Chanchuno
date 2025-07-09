@@ -3,10 +3,8 @@ package com.example.luciano.chanchuno
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
@@ -40,7 +38,7 @@ class partida : AppCompatActivity() {
         lista = findViewById(R.id.lv_partida)
         adapter = PartidaBaseAdapter(jugadores, this)
         lista?.setAdapter(adapter)
-        lista?.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+        lista?.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             val tvChancho = view.findViewById<TextView>(R.id.tvchancho)
             val imagenChancho = view.findViewById<ImageView>(R.id.fotocarnet)
             val tvNombre = view.findViewById<TextView>(R.id.tvNombreJugadorPartida)
@@ -80,7 +78,7 @@ class partida : AppCompatActivity() {
                     mostrarGanador()
                 }
             }
-        })
+        }
         lista?.setOnItemLongClickListener { _, view, position, _ ->
             val tvChancho = view.findViewById<TextView>(R.id.tvchancho)
             val posicion = tvChancho.text.length

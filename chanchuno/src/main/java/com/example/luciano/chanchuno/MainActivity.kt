@@ -1,5 +1,6 @@
 package com.example.luciano.chanchuno
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -17,7 +18,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.net.toUri
-import androidx.compose.material3.Text
 
 
 class MainActivity : AppCompatActivity() {
@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         btncomenzar = findViewById<View>(R.id.floatingActionButton2) as FloatingActionButton
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun agregar(view: View?) {
         if (etNombre!!.text.toString().isEmpty()) {
             Toast.makeText(this, "Ingres algun nombre de jugador", Toast.LENGTH_SHORT).show()
