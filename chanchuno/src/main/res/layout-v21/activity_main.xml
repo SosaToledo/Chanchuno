@@ -53,16 +53,18 @@
         android:id="@+id/floatingActionButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"
         android:clickable="true"
+        android:contentDescription="inicioDePartida"
+        android:elevation="3dp"
+        android:focusable="auto"
         android:onClick="iniciarPartida"
         app:elevation="12dp"
         app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_menu_myplaces"
-        android:elevation="3dp"/>
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contenedor"

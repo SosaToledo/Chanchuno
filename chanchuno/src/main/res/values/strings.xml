@@ -29,4 +29,5 @@
     <string name="pieLegal">Desarrollado en 2017, en Buenos Aires, Argentina por Thinco. Todos los derechos reservados.</string>
     <string name="quienes_somos">Somos Thinco una empresa dedicada al desarrollo de aplicaciones de celular, paginas web y sistemas de escritorio.</string>
     <string name="quienes_juegan">¿Quienes juegan?</string>
+    <string name="iniciodepartida">inicioDePartida</string>
 </resources>
